@@ -1,0 +1,27 @@
+import java.util.*;
+import java.io.*;
+
+class Solution{
+    public static void main(String []argh)
+    {
+        Scanner in = new Scanner(System.in);
+        Map<String, Integer> map=new HashMap<String, Integer>(); 
+        int num = in.nextInt();
+        in.nextLine();
+        
+        for(int i=0; i<num; i++)
+        {
+            String name=in.nextLine().toLowerCase();
+            int number=in.nextInt();
+            map.put(name, number);
+            in.nextLine();
+        }
+        
+        for(int i=0; i<num; i++){
+            String searchName = in.nextLine().toLowerCase();
+           if(map.containsKey(searchName)){
+                System.out.println(searchName+"="+map.get(searchName));
+            }else System.out.println("Not found");  
+        }
+    }
+}
