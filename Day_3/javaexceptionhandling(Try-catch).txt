@@ -1,0 +1,22 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        String x = scan.nextLine();
+        String y = scan.nextLine();
+        
+        try{
+            int result = Integer.parseInt(x)/Integer.parseInt(y);
+            System.out.println(result);
+        }
+        catch(ArithmeticException a){ 
+            System.out.println(a);
+        }
+        catch(NumberFormatException f){
+            System.out.println("java.util.InputMismatchException"); 
+        }
+    }
+}
