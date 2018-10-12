@@ -25,7 +25,7 @@ function readLine() {
 }
 
 // Complete the quickSort function below.
-function quickSort(arr) {
+function quickSort(ar) {
     var temp=0;
     var pivot=ar[0];
     var pIndex=ar.length-1;
