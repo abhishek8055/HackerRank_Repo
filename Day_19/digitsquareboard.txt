@@ -1,0 +1,90 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    
+    static boolean matrix[][];
+    
+    static boolean containsNonPrime(int x1, int y1, int x2, int y2)
+    {   for(int i = x1; i <=x2; i++)
+            for(int j = y1; j <=y2; j++)
+                if(matrix[i][j])
+                return true;
+        
+        return false;
+    }
+
+    public static void main(String[] args) {
+        int t;
+        int n;
+        Scanner in = new Scanner(System.in);
+        
+        t = in.nextInt();
+        
+        for(int i = 0; i < t ; i++)
+        {   long time = System.currentTimeMillis();
+            
+
+            
+            n = in.nextInt();
+            matrix = new boolean[n][n];
+            int nimber[][][][] = new int[n][n][n][n];
+         
+            for(int j = 0; j < n; j++)
+                for(int k = 0; k < n; k++)
+                {   int number = in.nextInt();
+                    if((number==1)||(number==4)||(number==6)||(number==8)||(number==9))
+                        matrix[j][k]=true;
+                }
+            
+           //HashSet<Integer> nimber_set = new HashSet<Integer>();
+         
+           for(int h = 0; h <n; h++)
+              for(int w = 0; w<n; w++)
+              {     for(int sh=0; sh+h<n; sh++)
+                        for(int sw=0; sw+w<n; sw++)
+                        {   if(!containsNonPrime(sh,sw,sh+h,sw+w))
+                            {   nimber[sh][sw][sh+h][sw+w] = 0;
+                                continue;
+                            }    
+                            
+                            int my_nimber = 0;
+                            //nimber_set.clear();
+                            boolean nimber_set[] = new boolean[60];
+                  
+                            //horizontal cuts
+                            for(int hCut=1; hCut<=h; hCut++)
+                            {   int xor =  nimber[sh][sw][sh+hCut-1][sw+w]^nimber[sh+hCut][sw][sh+h][sw+w];
+                                nimber_set[xor]=true;
+                            }
+                         
+                            //verical cuts
+                            for(int vCut=1; vCut<=w; vCut++)
+                            {   int xor =  nimber[sh][sw][sh+h][sw+vCut-1]^nimber[sh][sw+vCut][sh+h][sw+w];
+                                nimber_set[xor]=true;
+                            }
+                         
+                         
+                            while(true)
+                            {   if(nimber_set[my_nimber])
+                                    my_nimber++;
+                                else
+                                    break;
+                            }
+                            nimber[sh][sw][sh+h][sw+w] = my_nimber;
+                        }
+               
+              }
+            
+            //long completedIn = System.currentTimeMillis() - time;
+            //System.out.println(completedIn);
+            
+            if(nimber[0][0][n-1][n-1]==0)
+                System.out.println("Second");
+            else
+                System.out.println("First");
+        }
+        
+        
+    }
+}
